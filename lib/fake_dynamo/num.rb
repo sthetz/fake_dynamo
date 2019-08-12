@@ -4,12 +4,12 @@ module FakeDynamo
   class Num
     include Comparable
     attr_accessor :internal
-    LOW = BigDecimal.new('-.1e126')
-    HIGH = BigDecimal.new('.1e126')
+    LOW = BigDecimal('-.1e126')
+    HIGH = BigDecimal('.1e126')
 
     def initialize(value)
       validate!(value)
-      @internal = BigDecimal.new(value)
+      @internal = BigDecimal(value)
     end
 
     def validate!(n)
@@ -19,7 +19,7 @@ module FakeDynamo
         raise ValidationException, "The parameter cannot be converted to a numeric value: #{n}"
       end
 
-      b = BigDecimal.new(n)
+      b = BigDecimal(n)
       if b < LOW
         raise ValidationException, "Number underflow. Attempting to store a number with magnitude smaller than supported range"
       end
